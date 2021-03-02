@@ -29,13 +29,12 @@ RUN apt-get update && \
     apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
     apt-get update && sudo apt-get install terraform
 #adding aws secrets
-aws configure set aws_access_key_id default_access_key
-$ aws configure set aws_secret_access_key default_secret_key
-$ aws configure set default.region us-east-1
+    aws configure set aws_access_key_id default_access_key
+    aws configure set aws_secret_access_key default_secret_key
+    aws configure set default.region us-east-1
 #ADD settings.xml /home/jenkins/.m2/
 # Copy authorized keys
 COPY .ssh/authorized_keys /home/jenkins/.ssh/authorized_keys
-
 RUN chown -R jenkins:jenkins /home/jenkins/.ssh/
 
 # Standard SSH port
