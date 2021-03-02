@@ -17,8 +17,9 @@ RUN apt-get update && \
 # Cleanup old packages
     apt-get -qy autoremove && \
 # Add user jenkins to the image
-    useradd jenkins -p jenk123! && \
+    adduser --q jenkins --disabled-login --gecos GECOS && \
 # Set password for the jenkins user (you may want to alter this).
+    echo "jenkins:jenk123!" | chpasswd && \
     mkdir /home/jenkins/.m2
 #install pip3 packages
 RUN pip3 install awscli
