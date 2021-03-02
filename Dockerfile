@@ -22,14 +22,14 @@ RUN apt-get update && \
     echo "jenkins:jenk123!" | chpasswd && \
     mkdir /home/jenkins/.m2
 #install pip3 packages
-    pip3 install awscli
-    pip3 install boto3
+RUN pip3 install awscli
+RUN pip3 install boto3
 #installing terraform
     curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
     apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
     apt-get update && sudo apt-get install terraform
 #setting aws defaults
-    aws configure set default.region us-east-1
+RUN aws configure set default.region us-east-1
 #ADD settings.xml /home/jenkins/.m2/
 # Copy authorized keys
 COPY .ssh/authorized_keys /home/jenkins/.ssh/authorized_keys
