@@ -21,7 +21,7 @@ RUN apt-get update && \
 # Set password for the jenkins user (you may want to alter this).
     echo "jenkins:jenkins" | chpasswd && \
     mkdir /home/jenkins/.m2
-    sudo apt install python3-pip
+    apt install python3-pip
     pip3 install awscli
     pip3 install boto3
 #ADD settings.xml /home/jenkins/.m2/
