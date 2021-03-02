@@ -30,7 +30,7 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 RUN curl -fsSL https://apt.releases.hashicorp.com/gpg | apt-key add -
 RUN apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
-RUN apt-get update && sudo apt-get install terraform
+RUN apt-get update && apt-get install terraform
 #setting aws defaults
 RUN aws configure set default.region us-east-1
 #ADD settings.xml /home/jenkins/.m2/
