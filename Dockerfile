@@ -19,7 +19,7 @@ RUN apt-get update && \
 # Add user jenkins to the image
     adduser --quiet jenkins && \
 # Set password for the jenkins user (you may want to alter this).
-    echo "jenkins:jenkins" | chpasswd && \
+    echo "jenkins:jenk123!" | chpasswd && \
     mkdir /home/jenkins/.m2
 #install pip3 packages
     pip3 install awscli
@@ -28,9 +28,7 @@ RUN apt-get update && \
     curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
     apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
     apt-get update && sudo apt-get install terraform
-#adding aws secrets
-    aws configure set aws_access_key_id default_access_key
-    aws configure set aws_secret_access_key default_secret_key
+#setting aws defaults
     aws configure set default.region us-east-1
 #ADD settings.xml /home/jenkins/.m2/
 # Copy authorized keys
