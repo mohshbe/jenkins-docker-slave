@@ -17,7 +17,7 @@ RUN apt-get update && \
 # Cleanup old packages
     apt-get -qy autoremove && \
 # Add user jenkins to the image
-    adduser --quiet jenkins && \
+    useradd --quiet jenkins && \
 # Set password for the jenkins user (you may want to alter this).
     echo "jenkins:jenk123!" | chpasswd && \
     mkdir /home/jenkins/.m2
@@ -25,9 +25,12 @@ RUN apt-get update && \
 RUN pip3 install awscli
 RUN pip3 install boto3
 #installing terraform
-RUN curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
-    apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
-    apt-get update && sudo apt-get install terraform
+RUN apt-get update && \
+    apt-get install -y software-properties-common && \
+    rm -rf /var/lib/apt/lists/*
+RUN curl -fsSL https://apt.releases.hashicorp.com/gpg | apt-key add -
+RUN apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
+RUN apt-get update && sudo apt-get install terraform
 #setting aws defaults
 RUN aws configure set default.region us-east-1
 #ADD settings.xml /home/jenkins/.m2/
