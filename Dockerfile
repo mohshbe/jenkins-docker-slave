@@ -20,7 +20,7 @@ RUN apt-get update && \
     adduser --quiet jenkins --disabled-password --gecos GECOS && \
 # Set password for the jenkins user (you may want to alter this).
     echo "jenkins:jenkins" | chpasswd && \
-    mkdir /home/jenkins/.m2
+    mkdir -p /var/lib/jenkins/.ssh
 #install pip3 packages
 RUN pip3 install awscli
 RUN pip3 install boto3
@@ -35,8 +35,8 @@ RUN apt-get update && apt-get install terraform
 RUN aws configure set default.region us-east-1
 #ADD settings.xml /home/jenkins/.m2/
 # Copy authorized keys
-COPY .ssh/authorized_keys /home/jenkins/.ssh/authorized_keys
-RUN chown -R jenkins:jenkins /home/jenkins/.ssh/
+COPY .ssh/authorized_keys /var/lib/jenkins/.ssh/authorized_keys
+RUN chown -R jenkins:jenkins /var/lib/jenkins/.ssh/
 
 # Standard SSH port
 EXPOSE 22
