@@ -13,7 +13,7 @@ RUN apt-get update && \
 # Install JDK 8 (latest stable edition at 2019-04-01)
     apt-get install -qy openjdk-8-jdk && \
 # Install git, jq, boto3, awscli
-    apt-get install -qy jq python3-pip curl && \
+    apt-get install -qy jq python3-pip curl zip git && \
 # Cleanup old packages
     apt-get -qy autoremove && \
 # Add user jenkins to the image
